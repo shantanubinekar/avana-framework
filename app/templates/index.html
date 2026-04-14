@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Vulnerability Static Analysis Framework</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h2>AVAnA</h2>
+                <p>Android Vuln Analysis</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" data-section="dashboard" class="nav-link active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#" data-section="upload" class="nav-link"><i class="fas fa-upload"></i> Upload APK</a></li>
+                <li><a href="#" data-section="analysis" class="nav-link"><i class="fas fa-magnifying-glass"></i> Analysis</a></li>
+                <li><a href="#" data-section="reports" class="nav-link"><i class="fas fa-file-pdf"></i> Reports</a></li>
+                <li><a href="#" data-section="settings" class="nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>&copy; 2026 AVAnA</p>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Search vulnerabilities...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-menu">
+                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="section active">
+                    <div class="stats-grid">
+                        <div class="stat-card critical">
+                            <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+                            <div class="stat-content">
+                                <h3>Critical</h3>
+                                <p id="critical-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card high">
+                            <div class="stat-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                            <div class="stat-content">
+                                <h3>High</h3>
+                                <p id="high-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card medium">
+                            <div class="stat-icon"><i class="fas fa-circle-exclamation"></i></div>
+                            <div class="stat-content">
+                                <h3>Medium</h3>
+                                <p id="medium-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card low">
+                            <div class="stat-icon"><i class="fas fa-info-circle"></i></div>
+                            <div class="stat-content">
+                                <h3>Low</h3>
+                                <p id="low-count">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <h2>Recent Analyses</h2>
+                            <div id="recent-analyses">
+                                <p class="placeholder">No analyses yet. Upload an APK to get started.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h2>Top Vulnerabilities</h2>
+                            <div id="top-vulns">
+                                <p class="placeholder">No vulnerabilities detected yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upload Section -->
+                <section id="upload-section" class="section">
+                    <div class="card upload-card">
+                        <h2>Upload Android Application</h2>
+                        <form id="upload-form" enctype="multipart/form-data">
+                            <div class="upload-area" id="upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h3>Drag and drop your APK file here</h3>
+                                <p>or click to browse</p>
+                                <input type="file" id="file-input" accept=".apk" hidden>
+                            </div>
+                            <div id="file-info" class="file-info" style="display: none;">
+                                <p><strong>File:</strong> <span id="file-name"></span></p>
+                                <p><strong>Size:</strong> <span id="file-size"></span></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="app-name">Application Name (Optional)</label>
+                                <input type="text" id="app-name" placeholder="e.g., MyApp">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-check"></i> Analysis Options</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="permission-check" checked>
+                                        <span>Permission Analysis</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="crypto-check" checked>
+                                        <span>Cryptography Analysis</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="injection-check" checked>
+                                        <span>Injection Vulnerabilities</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="hardcoded-check" checked>
+                                        <span>Hardcoded Secrets</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="webview-check" checked>
+                                        <span>WebView Issues</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload & Analyze</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Analysis Section -->
+                <section id="analysis-section" class="section">
+                    <div class="card">
+                        <h2>Vulnerability Analysis Results</h2>
+                        <div class="filter-group">
+                            <select id="severity-filter">
+                                <option value="">All Severities</option>
+                                <option value="critical">Critical</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                            <select id="category-filter">
+                                <option value="">All Categories</option>
+                                <option value="permissions">Permissions</option>
+                                <option value="cryptography">Cryptography</option>
+                                <option value="injection">Injection</option>
+                                <option value="hardcoded">Hardcoded Secrets</option>
+                                <option value="webview">WebView</option>
+                            </select>
+                        </div>
+                        <div id="analysis-results" class="results-container">
+                            <p class="placeholder">No analysis results available. Upload an APK first.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reports Section -->
+                <section id="reports-section" class="section">
+                    <div class="reports-grid">
+                        <div class="card">
+                            <h2>Generated Reports</h2>
+                            <div id="reports-list">
+                                <p class="placeholder">No reports generated yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="section">
+                    <div class="card">
+                        <h2>Settings</h2>
+                        <div class="settings-group">
+                            <h3>Analysis Settings</h3>
+                            <label class="setting-item">
+                                <span>Deep Scan</span>
+                                <input type="checkbox" id="deep-scan" checked>
+                            </label>
+                            <label class="setting-item">
+                                <span>Include Decompiled Code Analysis</span>
+                                <input type="checkbox" id="decompile-code" checked>
+                            </label>
+                            <label class="setting-item">
+                                <span>Auto-generate PDF Reports</span>
+                                <input type="checkbox" id="auto-pdf">
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Notification Settings</h3>
+                            <label class="setting-item">
+                                <span>Email Notifications</span>
+                                <input type="checkbox">
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vulnerability Detail Modal -->
+    <div id="vuln-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Processing Progress Modal -->
+    <div id="progress-modal" class="modal" style="display: none;">
+        <div class="modal-content progress-modal">
+            <h2>Analyzing Application...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p id="progress-text">Starting analysis...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
