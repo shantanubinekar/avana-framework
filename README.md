@@ -36,7 +36,8 @@ A comprehensive HTML-based framework for performing static analysis of vulnerabi
 
 ### 1. Clone/Setup the Project
 ```bash
-cd /Users/shantanubinekar/Documents/vulnerability
+git clone https://github.com/shantanubinekar/avana-framework.git
+cd avana-framework
 ```
 
 ### 2. Create Virtual Environment
