@@ -42,8 +42,8 @@ cd avana-framework
 
 ### 2. Create Virtual Environment
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+py -m venv venv # On mac/linux: python3 -m venv venv
+venv\Scripts\activate  # On mac/linux: source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
@@ -55,10 +55,10 @@ pip install -r requirements.txt
 
 ### Starting the Application
 ```bash
-python3 run.py
+py run.py # On mac/linux: python3 run.py
 ```
 
-The application will start on `http://localhost:5000`
+The application will start on `http://localhost:5000/5001`
 
 ### Uploading an APK
 1. Go to the "Upload APK" section
